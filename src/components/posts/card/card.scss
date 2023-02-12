@@ -1,0 +1,48 @@
+@import "../../../styles/colors.scss";
+
+.card__container {
+  width: 100%;
+  display: flex;
+  max-height: 32.5rem;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  margin-bottom: 3.5rem;
+  cursor: pointer;
+
+  .card__left-section {
+    width: 50%;
+    padding: 5rem 4rem;
+    color: $BLACK;
+
+    .card__number {
+      font-weight: 500;
+      font-size: 2rem;
+    }
+
+    .card__title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .card__description {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      color: $GREY;
+    }
+  }
+
+  .card__right-section {
+    width: 50%;
+
+    .card__image {
+      width: 100%;
+      object-fit: cover;
+      height: 100%;
+      border-radius: 0rem 1rem 1rem 0rem;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@import "../../styles/colors.scss";
+
+.header__container {
+  padding: 2.5% 10%;
+  background-color: $WHITE;
+  color: $BLACK;
+
+  .header__title {
+    font-weight: 700;
+    font-size: 2.6rem;
+  }
+
+  .header__subtitle {
+    margin-top: 1rem;
+    font-weight: 500;
+    font-size: 1.4rem;
+  }
+}

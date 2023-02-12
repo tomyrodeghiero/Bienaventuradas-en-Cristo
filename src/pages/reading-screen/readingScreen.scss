@@ -1,0 +1,41 @@
+@import "../../styles/colors.scss";
+
+.reading__container {
+  padding: 1.5% 10% 0 10%;
+
+  .posts__pathname {
+    color: $GREY;
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin-bottom: 1.75rem;
+
+    .posts__pathname--bold {
+      font-weight: 600;
+      color: $BLACK;
+    }
+  }
+
+  .reading-posts__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+
+  .load-more__container {
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .load-more__btn {
+      border: 1px solid $PINK;
+      padding: 1.25rem 3rem;
+      background-color: $WHITE;
+      color: $PINK;
+      border-radius: 4rem;
+      font-weight: 500;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import "../../styles/colors.scss";
+
+.reading__image {
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.reading-author__container {
+  font-size: 1.4rem;
+  color: $GREY;
+  font-weight: 500;
+
+  .reading-autor__text {
+    color: $BLACK;
+    font-weight: 600;
+  }
+}
+
+.reading-post__title {
+  font-size: 2.4rem;
+  color: $BLACK;
+}
+
+.reading-post__description {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: $GREY;
+}

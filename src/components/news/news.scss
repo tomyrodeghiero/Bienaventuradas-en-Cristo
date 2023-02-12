@@ -1,0 +1,29 @@
+@import "../../styles/colors.scss";
+
+.news__container {
+  width: 100%;
+
+  .news__title__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid $LIGHT_GREY;
+
+    .news__title__text {
+      margin: 0;
+      padding: 0;
+      font-size: 2rem;
+      color: $BLACK;
+      font-weight: 700;
+    }
+
+    .see_entries__text {
+      margin: 0;
+      padding: 0;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: $GREY;
+    }
+  }
+}

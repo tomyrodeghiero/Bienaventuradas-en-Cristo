@@ -1,0 +1,25 @@
+@import "../../styles/colors.scss";
+
+.posts__container {
+  width: 100%;
+  background-color: $LIGHT_WHITE;
+  padding: 0% 10%;
+
+  @media screen and (max-width: 1024px) {
+    .posts__container {
+      padding: 0;
+    }
+  }
+
+  .posts__pathname {
+    color: $GREY;
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin-bottom: 1.75rem;
+
+    .posts__pathname--bold {
+      font-weight: 600;
+      color: $BLACK;
+    }
+  }
+}
