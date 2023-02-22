@@ -1,0 +1,118 @@
+@import "../../styles/colors.scss";
+
+a {
+  text-decoration: none;
+  color: #1e1e23;
+  opacity: 1;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  transition: 200ms;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.mobile-navbar__container {
+  background-color: $WHITE;
+  padding: 0.75rem 2.5rem;
+  position: fixed;
+  width: 100%;
+  border-bottom: 1px solid $LIGHT_GREY;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+
+  .mobile-navbar__logotype {
+    height: 5.5rem;
+  }
+}
+
+// Definir estilos de la barra lateral
+.mobile-sidebar {
+  width: 40%; // Ancho de la barra lateral
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: -100%; // Inicialmente oculto fuera de la pantalla
+  background-color: #fff;
+  transition: left 0.5s ease-in-out; // Agregar transición suave
+  z-index: 10;
+  padding-top: 5rem;
+  color: $BLACK;
+  font-weight: 700;
+
+  .mobile-navbar__active {
+    background-color: $LIGHT_PINK;
+    color: $WHITE;
+    font-weight: 700;
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mobile-navbar__inactive {
+    background-color: $WHITE;
+    color: $BLACK;
+    font-weight: 600;
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+// Mostrar la barra lateral cuando esté abierta
+.mobile-sidebar.open {
+  left: 0;
+}
+
+// Estilos para los enlaces de la barra lateral
+.mobile-sidebar a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #000;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #eee; // Cambiar color de fondo en hover
+  }
+}
+
+// Hamburger
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 1.8rem;
+  cursor: pointer;
+  z-index: 15;
+
+  span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background-color: #1e1e23;
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+
+  &.open {
+    span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    span:nth-child(2) {
+      opacity: 0;
+    }
+    span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+}
+
+.mobile-navbar__flag {
+  height: 2.5rem;
+}

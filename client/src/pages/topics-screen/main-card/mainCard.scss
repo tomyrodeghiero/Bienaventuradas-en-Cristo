@@ -1,0 +1,35 @@
+@import "../../../styles/colors.scss";
+
+.main-card__container {
+  background-color: $WHITE;
+  padding: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  .main-card__header {
+    display: flex;
+    align-items: center;
+
+    .main-card__icon {
+      height: 3rem;
+      margin-right: 2rem;
+    }
+
+    .main-card__title {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+  }
+
+  .main-card__description {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+}

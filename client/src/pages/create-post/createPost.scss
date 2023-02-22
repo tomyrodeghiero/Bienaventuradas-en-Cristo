@@ -1,0 +1,219 @@
+@import "../../styles/colors.scss";
+@import "../../styles/devices.scss";
+
+.create__form {
+  width: 100%;
+  font-size: 1.6rem;
+  padding: 0% 10%;
+  font-size: 1.8rem;
+
+  .load-image__container {
+    width: 100%;
+    margin: 2.5rem 0rem;
+    border-radius: 0.5rem;
+    border: 1px dashed $GREY;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+
+    .load-image__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 0;
+    }
+
+    .load-file__image {
+      width: 4rem;
+    }
+
+    .load-file__text-primary {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+
+      @media (min-width: $notebook) {
+        font-size: 1.7rem;
+      }
+    }
+
+    .load-file__text-secondary {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: $GREY;
+      margin: 1rem 0;
+      @media (min-width: $notebook) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .load-file__buton {
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.75rem;
+      border: 1.5px solid $LIGHT_BLUE;
+      margin-top: 2.5rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $GREY;
+  outline: 0;
+  font-size: 1.6rem;
+  color: $BLACK;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $GREY;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $BLACK;
+    font-weight: 600;
+  }
+  padding-bottom: 6px;
+  font-weight: 600;
+  border-width: 2px;
+  border-image: linear-gradient(to right, $LIGHT_PINK, $GREY);
+  border-image-slice: 1;
+}
+/* reset input */
+.form__field {
+  &:required,
+  &:invalid {
+    box-shadow: none;
+  }
+}
+
+input[type="file"] {
+  /* Oculta el botón del input file */
+  display: none;
+}
+
+label.upload-button {
+  /* Estilo del botón */
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+label.upload-button:hover {
+  background-color: #3e8e41;
+}
+
+input[type="file"]:focus + label.upload-button {
+  /* Estilo del botón cuando está en foco */
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+.ql-editor {
+  font-family: "Open Sans", sans-serif;
+}
+
+.uploaded-image {
+  font-weight: 400;
+  margin: 2.5rem 0;
+}
+
+.uploaded-file__container {
+  display: flex;
+  gap: 1.25rem;
+  margin: 2.5rem 0;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .upload-file-success__icon {
+    height: 2rem;
+  }
+}
+
+.create-post__btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 2.5rem 0;
+
+  .create-post__button {
+    padding: 1rem 1.5rem;
+    background-color: $LIGHT_PINK;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    color: $WHITE;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+  }
+}
+
+.load-word__btn {
+  background-color: $BLUE;
+  width: auto;
+  color: $WHITE;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 1rem 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  .word__icon {
+    height: 2rem;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
+}

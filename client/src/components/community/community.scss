@@ -1,0 +1,98 @@
+@import "../../styles/colors.scss";
+@import "../../styles/devices.scss";
+
+.community__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 7.5% 10%;
+  color: $BLACK;
+
+  .community__title {
+    font-weight: 600;
+    font-size: 1.75rem;
+
+    @media (min-width: $tablet) {
+      font-size: 2.25rem;
+    }
+
+    @media (min-width: $notebook) {
+      font-size: 3rem;
+    }
+
+    @media (min-width: $desktop) {
+      font-size: 3.5rem;
+    }
+  }
+
+  .community__subtitle {
+    margin-top: 1.25rem;
+    font-weight: 500;
+    font-size: 1.2rem;
+    text-align: center;
+
+    @media (min-width: $tablet) {
+      font-size: 1.3rem;
+    }
+
+    @media (min-width: $notebook) {
+      font-size: 1.4rem;
+    }
+
+    @media (min-width: $desktop) {
+      font-size: 1.6rem;
+    }
+  }
+
+  .community__input__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.75rem;
+    position: relative;
+    width: 110%;
+
+    @media (min-width: $tablet) {
+      width: 40%;
+    }
+
+    .community__input {
+      width: 100%;
+      border-radius: 4rem;
+      background-color: $WHITE;
+      padding: 1.25rem 1.75rem;
+      font-size: 1.5rem;
+      color: $BLACK;
+      border: 1px solid $LIGHT_GREY;
+      background-color: $WHITE;
+
+      &:focus {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+          rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        outline: none;
+      }
+    }
+
+    .community__subscribe--btn {
+      position: absolute;
+      background-color: $PINK;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      border-radius: 4rem;
+      padding: 0 1.25rem;
+      font-weight: 500;
+      color: $WHITE;
+      right: 0;
+      font-size: 1.4rem;
+      cursor: pointer;
+
+      @media (min-width: $tablet) {
+        padding: 0 1.5rem;
+        font-size: 1.6rem;
+      }
+    }
+  }
+}

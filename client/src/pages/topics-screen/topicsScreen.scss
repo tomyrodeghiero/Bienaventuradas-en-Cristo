@@ -1,0 +1,27 @@
+@import "../../styles/colors.scss";
+@import "../../styles/devices.scss";
+
+.topics__container {
+  padding: 1.5% 10% 0 10%;
+
+  .topics__pathname {
+    color: $GREY;
+    font-weight: 500;
+    margin-bottom: 1.75rem;
+
+    .topics__pathname--bold {
+      font-weight: 600;
+      color: $BLACK;
+    }
+  }
+
+  .topics__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+
+    @media (min-width: $notebook) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

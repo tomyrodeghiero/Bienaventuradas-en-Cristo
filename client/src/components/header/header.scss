@@ -1,0 +1,29 @@
+@import "../../styles/colors.scss";
+@import "../../styles/devices.scss";
+
+.header__container {
+  padding: 0 10% 2.5% 10%;
+  background-color: $WHITE;
+  color: $BLACK;
+  padding-top: 2.5rem;
+
+  @media (min-width: $notebook) {
+    padding-top: 0;
+  }
+
+  .header__title {
+    font-weight: 700;
+    margin-top: 25%;
+    font-size: 2.6rem;
+
+    @media (min-width: $tablet) {
+      margin-top: 0%;
+    }
+  }
+
+  .header__subtitle {
+    margin-top: 1rem;
+    font-weight: 500;
+    font-size: 1.4rem;
+  }
+}

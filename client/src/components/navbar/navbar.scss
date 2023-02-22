@@ -1,0 +1,114 @@
+@import "../../styles/colors.scss";
+
+.navbar__container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.6rem;
+  padding: 2.5% 10%;
+  font-size: 1.8rem;
+  background-color: $WHITE;
+
+  @media screen and (max-width: 1024px) {
+    .navbar__container {
+      padding: 0;
+    }
+  }
+
+  .left-section__container {
+    display: block;
+    height: 5rem;
+    width: 70%;
+
+    .navbar__items--content {
+      display: flex;
+      height: 100%;
+
+      .navbar__inner__container {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-left: 8.5rem;
+        justify-content: space-between;
+
+        .navbar__links {
+          display: flex;
+          gap: 7rem;
+          align-items: center;
+          color: $BLACK;
+          cursor: pointer;
+        }
+
+        .navbar__link--active {
+          background-color: $LIGHT_PINK;
+          padding: 0.5rem 1.5rem;
+          border-radius: 1rem;
+          color: $WHITE;
+        }
+
+        .flag {
+          width: 2.75rem;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .logotype {
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+
+  .right-section__container {
+    width: 30%;
+
+    .search__container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 5rem;
+
+      .search {
+        height: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.administrator__container {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 5rem;
+  gap: 1.5rem;
+
+  .administrator__img {
+    height: 3rem;
+  }
+
+  .administrator__text {
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+}
+
+.link {
+  --s: 0.25rem; /* the thickness of the line */
+  --c: #ff929f; /* the color */
+
+  color: $BLACK;
+  font-weight: 600;
+  padding-bottom: var(--s);
+  background: linear-gradient(90deg, var(--c) 50%, #000 0)
+      calc(100% - var(--_p, 0%)) / 200% 100%,
+    linear-gradient(var(--c) 0 0) 0% 100% / var(--_p, 0%) var(--s) no-repeat;
+  -webkit-background-clip: text, padding-box;
+  background-clip: text, padding-box;
+  transition: 0.5s;
+
+  &:hover {
+    --_p: 100%;
+  }
+}

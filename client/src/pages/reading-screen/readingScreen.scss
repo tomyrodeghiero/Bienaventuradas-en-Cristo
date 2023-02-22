@@ -1,0 +1,93 @@
+@import "../../styles/colors.scss";
+@import "../../styles/devices.scss";
+
+.reading__container {
+  padding: 1.5% 10% 0 10%;
+
+  .posts__pathname {
+    color: $GREY;
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin-bottom: 1.75rem;
+
+    .posts__pathname--bold {
+      font-weight: 600;
+      color: $BLACK;
+    }
+  }
+
+  .reading-posts__grid {
+    display: grid;
+    gap: 3rem;
+
+    @media (min-width: $tablet) {
+      width: 100%;
+      padding: 5rem 4rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .load-more__container {
+    margin: 5% 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .load-more__btn {
+      border: 1px solid $PINK;
+      padding: 1.25rem 3rem;
+      background-color: $WHITE;
+      color: $PINK;
+      border-radius: 4rem;
+      font-weight: 500;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+  }
+
+  .reading-posts-topics__container {
+    width: 100%;
+    text-decoration: none;
+
+    .reading-posts-topics__title {
+      font-weight: 700;
+      font-size: 2.6rem;
+      color: $BLACK;
+      margin-bottom: 2.5%;
+      text-decoration: none;
+    }
+
+    .reading-posts-topics__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 3.5rem;
+      text-decoration: none;
+
+      .reading-post-topics__card {
+        background-color: $WHITE;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        height: 15rem;
+        display: flex;
+        align-items: center;
+        padding: 2.5rem;
+        border-radius: 0.5rem;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+
+        .reading-posts-topics__icon {
+          width: 3rem;
+          margin-right: 2rem;
+        }
+
+        .reading-posts-topics__title-icon {
+          font-size: 1.6rem;
+          font-weight: 600;
+        }
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
