@@ -64,6 +64,7 @@ app.post("/login", async (req, res) => {
           .cookie("token", token, {
             maxAge: 3600000, // 1 hour
             httpOnly: true, // the cookie is not accessible via client-side scripts
+            secure: true, // HTTPS only
           })
           .json({
             id: userDoc._id,
