@@ -4,29 +4,20 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./createPost.scss";
 
-import "quill/dist/quill.snow.css";
 import MobileNavbar from "../../components/mobile-navbar/MobileNavbar";
 import Navbar from "../../components/navbar/Navbar";
 import { useTranslation } from "react-i18next";
 import LoadFileIcon from "../../assets/load-file.png";
 import WordIcon from "../../assets/word.png";
 import Check from "../../assets/check.png";
-import JSZip from "jszip";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState<any>("");
   const [redirect, setRedirect] = useState(false);
-  const { t } = useTranslation();
 
   const [files, setFiles] = useState<FileList | any | null>(null);
-
-  const handleFileChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setFiles(ev.target.files);
-  };
-
-  const [wordInformation, setWordInformation] = useState<any>(null);
 
   async function createNewPost(ev: any) {
     const data = new FormData();
@@ -61,43 +52,6 @@ const CreatePost = () => {
   }, []);
 
   const [file, setFile] = useState<any>(null);
-
-  function convertWordToHtml(wordContent: any) {
-    const zip = new JSZip();
-    return zip.loadAsync(wordContent).then((zip: any) => {
-      const xml = zip.file("word/document.xml").async("string");
-      return xml.then((xml: any) => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(xml, "application/xml");
-        const paragraphs = doc.getElementsByTagName("w:p");
-        let html = "";
-        for (let i = 0; i < paragraphs.length; i++) {
-          const paragraph = paragraphs[i];
-          const texts = paragraph.getElementsByTagName("w:t");
-          for (let j = 0; j < texts.length; j++) {
-            const text = texts[j];
-            const textContent = text.textContent;
-            html += textContent;
-          }
-          html += "<br>";
-        }
-        return html;
-      });
-    });
-  }
-
-  function handleWordFileChange(event: any) {
-    const wordFile = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function (event: any) {
-      const wordContent = event.target.result;
-      convertWordToHtml(wordContent).then(function (htmlContent) {
-        // quillRef.current.firstChild.innerHTML = htmlContent;
-        setWordInformation(htmlContent);
-      });
-    };
-    reader.readAsArrayBuffer(wordFile);
-  }
 
   return (
     <main>
@@ -180,12 +134,7 @@ const CreatePost = () => {
         <button className="load-word__btn">
           <img src={WordIcon} alt="Word Icon" className="word__icon" />
           <label htmlFor="wordFileInput">Importar Word</label>
-          <input
-            type="file"
-            id="wordFileInput"
-            accept=".docx"
-            onChange={handleWordFileChange}
-          />
+          <input type="file" id="wordFileInput" accept=".docx" />
           {file && <p>Archivo seleccionado: {file.name}</p>}
         </button>
 
