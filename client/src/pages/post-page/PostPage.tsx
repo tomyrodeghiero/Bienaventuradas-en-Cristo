@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../../context/UserContext";
 import { useParams } from "react-router-dom";
-import { formatISO9075 } from "date-fns";
 import MobileNavbar from "../../components/mobile-navbar/MobileNavbar";
 import Navbar from "../../components/navbar/Navbar";
 import "./postPage.scss";

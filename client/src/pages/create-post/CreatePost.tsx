@@ -1,13 +1,9 @@
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useQuill } from "react-quilljs";
 import "./createPost.scss";
 
-import { readFileSync } from "fs";
-import { Document, Packer } from "docx";
-
-import BlotFormatter from "quill-blot-formatter";
 import "quill/dist/quill.snow.css";
 import MobileNavbar from "../../components/mobile-navbar/MobileNavbar";
 import Navbar from "../../components/navbar/Navbar";
@@ -16,7 +12,6 @@ import LoadFileIcon from "../../assets/load-file.png";
 import WordIcon from "../../assets/word.png";
 import Check from "../../assets/check.png";
 import JSZip from "jszip";
-// import mammoth from "mammoth";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -33,12 +28,9 @@ const CreatePost = () => {
 
   const [wordInformation, setWordInformation] = useState<any>(null);
 
-  const { quill, quillRef, Quill } = useQuill({
-    modules: { blotFormatter: {} },
-  });
+  const { quill, quillRef, Quill } = useQuill({});
 
   if (Quill && !quill) {
-    Quill.register("modules/blotFormatter", BlotFormatter);
   }
 
   useEffect(() => {

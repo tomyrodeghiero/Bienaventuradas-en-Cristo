@@ -20,9 +20,10 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3000",
-      "http://localhost:4173/",
-      "http://localhost:5173/",
+      "http://localhost:4173",
+      "http://localhost:5173",
       "https://blog-v1-digf.onrender.com",
+      "https://blog-frontend-v2.onrender.com",
     ],
   })
 );
