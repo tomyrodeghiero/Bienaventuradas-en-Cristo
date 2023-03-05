@@ -22,6 +22,7 @@ const LoginScreen = () => {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-type": "application/json" },
+      credentials: "include",
     });
 
     if (response.ok) {
