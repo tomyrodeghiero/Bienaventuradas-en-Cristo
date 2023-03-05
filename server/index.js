@@ -23,7 +23,7 @@ app.use(
       "http://localhost:4173",
       "http://localhost:5173",
       "https://blog-v1-digf.onrender.com",
-      "https://bienaventuradas-en-cristo.vercel.app/",
+      "https://bienaventuradas-en-cristo.vercel.app",
       "https://blog-frontend-v2.onrender.com",
     ],
   })
