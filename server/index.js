@@ -58,20 +58,18 @@ app.post("/login", async (req, res) => {
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
       // logged in
+      console.log("passOk", passOk);
       jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+        console.log("token", token);
+        console.log("user information: ", userDoc._id, username);
         if (err) throw err;
-        res
-          .cookie("token", token, {
-            maxAge: 3600000, // 1 hour
-            httpOnly: true, // the cookie is not accessible via client-side scripts
-            secure: true, // HTTPS only
-          })
-          .json({
-            id: userDoc._id,
-            username,
-          });
+        res.cookie("token", token).json({
+          id: userDoc._id,
+          username,
+        });
       });
     }
+    res.status(200).json(username);
   } else {
     res.status(400).json("wrong credentials");
   }
@@ -119,7 +117,7 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
         cover: newPath,
         author: info.id,
       });
-      res.json(postDoc);
+      res.status(200).json(postDoc);
     });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
