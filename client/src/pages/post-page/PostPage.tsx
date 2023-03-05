@@ -7,10 +7,13 @@ import Navbar from "../../components/navbar/Navbar";
 import "./postPage.scss";
 import Community from "../../components/community/Community";
 import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/Header";
+import { useTranslation } from "react-i18next";
 
 const PostPage = () => {
   const [postInfo, setPostInfo] = useState<any>(null);
   const { userInfo } = useContext(UserContext);
+  const { t } = useTranslation();
   const { id } = useParams();
   useEffect(() => {
     fetch(`http://localhost:4000/post/${id}`).then((response) => {
@@ -36,15 +39,20 @@ const PostPage = () => {
 
   return (
     <main>
-      {windowWidth < 576 ? <MobileNavbar /> : <Navbar />}
+      {windowWidth < 992 ? <MobileNavbar /> : <Navbar />}
+
+      <Header
+        title={postInfo.title}
+        description={postInfo.summary}
+        author={postInfo.author.username}
+        createdAt={postInfo.createdAt}
+      />
 
       <div className="post-page__container">
-        <section className="post-page__header">
-          <h1>{postInfo.title}</h1>
-        </section>
-
-        {/* <time>{formatISO9075(new Date(postInfo.createAt))}</time> */}
-        <div className="author">by @{postInfo.author.username}</div>
+        <h5 className="post-page__pathname">
+          {t("Inicio")} - {t("Lista de Lecturas")} -&nbsp;
+          <span className="post-page__pathname--bold">{postInfo.title}</span>
+        </h5>
         <div>
           <img
             src={`http://localhost:4000/${postInfo.cover}`}

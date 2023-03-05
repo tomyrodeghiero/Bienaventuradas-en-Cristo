@@ -3,6 +3,18 @@
 
 .post-page__container {
   width: 100%;
+  padding: 0 10% 2.5% 10%;
+
+  .post-page__pathname {
+    color: $GREY;
+    font-weight: 500;
+    margin: 1.75rem 0;
+
+    .post-page__pathname--bold {
+      font-weight: 600;
+      color: $BLACK;
+    }
+  }
 
   .post-page__header {
     padding-top: 9rem;

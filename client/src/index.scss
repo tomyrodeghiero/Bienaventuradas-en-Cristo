@@ -21,6 +21,17 @@ body {
   scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+  background-color: $LIGHT_GREY;
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $LIGHT_PINK;
+  border-radius: 0.75rem;
+}
+
 div,
 h1,
 h2,

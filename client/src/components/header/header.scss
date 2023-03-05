@@ -26,4 +26,22 @@
     font-weight: 500;
     font-size: 1.4rem;
   }
+
+  .header__author {
+    margin-top: 2.25rem;
+    display: flex;
+    align-items: center;
+    color: $GREY;
+    text-transform: uppercase;
+
+    .header-content__author {
+      margin-left: 1.5rem;
+      font-size: 1.4rem;
+    }
+
+    .administrator__img {
+      height: 3rem;
+      border-radius: 50%;
+    }
+  }
 }

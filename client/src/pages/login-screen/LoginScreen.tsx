@@ -67,7 +67,7 @@ const LoginScreen = () => {
       </header>
 
       <section className="login__section">
-        {windowWidth > 576 && (
+        {windowWidth > 1024 && (
           <div className="login__left-section">
             <div className="login__top-section">
               <h2 className="login-purpose__text">Writing with a purpose</h2>
@@ -78,39 +78,43 @@ const LoginScreen = () => {
         )}
 
         <div className="login__right-section">
-          <h4 className="login__welcome">Welcome!</h4>
+          <div>
+            <h4 className="login__welcome">Welcome!</h4>
 
-          <div className="login__credentials">
-            <h3 className="login__enter-credentials">
-              Enter your credentials to access
-            </h3>
+            <div className="login__credentials">
+              <h3 className="login__enter-credentials">
+                Enter your credentials to access
+              </h3>
 
-            <p className="login__start-writing">
-              Let's start writing
-              <span style={{ marginLeft: "0.75rem" }}>😊</span>
-            </p>
+              <p className="login__start-writing">
+                Let's start writing
+                <span style={{ marginLeft: "0.75rem" }}>😊</span>
+              </p>
+            </div>
           </div>
 
-          <div className="input__container">
-            <h5 className="input__label">User name</h5>
-            <input
-              type="text"
-              className="input__text"
-              placeholder="Enter your user name"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
+          <div>
+            <div className="input__container">
+              <h5 className="input__label">User name</h5>
+              <input
+                type="text"
+                className="input__text"
+                placeholder="Enter your user name"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
 
-          <div className="input__container">
-            <h5 className="input__label">Password</h5>
-            <input
-              type="text"
-              className="input__text"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="input__container">
+              <h5 className="input__label">Password</h5>
+              <input
+                type="text"
+                className="input__text"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
           </div>
 
           <button className="login__btn">Login</button>

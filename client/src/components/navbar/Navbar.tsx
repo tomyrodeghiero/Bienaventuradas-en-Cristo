@@ -7,7 +7,7 @@ import EnglishFlag from "../../assets/great-britain.png";
 import Search from "../../assets/search.png";
 import i18next, { t } from "i18next";
 import { Link, useLocation } from "react-router-dom";
-import Administrator from "../../assets/administrator.png";
+import Administrator from "../../assets/administrator.jpeg";
 
 const Navbar = () => {
   const [language, setLanguage] = useState(i18next.language);
