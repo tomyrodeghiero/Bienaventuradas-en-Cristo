@@ -22,7 +22,6 @@ const LoginScreen = () => {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-type": "application/json" },
-      credentials: "include",
     });
 
     if (response.ok) {
@@ -108,7 +107,7 @@ const LoginScreen = () => {
             <div className="input__container">
               <h5 className="input__label">Password</h5>
               <input
-                type="text"
+                type="password"
                 className="input__text"
                 placeholder="Enter your password"
                 value={password}
