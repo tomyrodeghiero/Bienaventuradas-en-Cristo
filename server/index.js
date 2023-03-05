@@ -60,10 +60,15 @@ app.post("/login", async (req, res) => {
       // logged in
       jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
         if (err) throw err;
-        res.cookie("token", token).json({
-          id: userDoc._id,
-          username,
-        });
+        res
+          .cookie("token", token, {
+            maxAge: 3600000, // 1 hour
+            httpOnly: true, // the cookie is not accessible via client-side scripts
+          })
+          .json({
+            id: userDoc._id,
+            username,
+          });
       });
     }
   } else {
