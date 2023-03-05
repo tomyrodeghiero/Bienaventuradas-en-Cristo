@@ -108,9 +108,18 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
 
 app.put(
   "/post",
-  uploadMiddleware.single("file", async (req, res) => {
+  (req, res, next) => {
+    const { token } = req.cookies;
+    if (!token) {
+      res.status(401).json({ message: "Unauthorized" });
+    } else {
+      next();
+    }
+  },
+  uploadMiddleware.single("file"),
+  async (req, res) => {
     res.json(req.file);
-  })
+  }
 );
 
 app.get("/post", async (req, res) => {

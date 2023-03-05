@@ -8,6 +8,7 @@ import Community from "../../components/community/Community";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import { useTranslation } from "react-i18next";
+import Instagram from "../../assets/instagram.png";
 
 const PostPage = () => {
   const [postInfo, setPostInfo] = useState<any>(null);
@@ -52,14 +53,18 @@ const PostPage = () => {
           {t("Inicio")} - {t("Lista de Lecturas")} -&nbsp;
           <span className="post-page__pathname--bold">{postInfo.title}</span>
         </h5>
+
         <div>
-          <img
-            src={`https://blog-v1-digf.onrender.com/${postInfo.cover}`}
-            alt="Main Image"
-            className="post-page__cover"
-          />
+          <img src={Instagram} alt="Instagram" className="post-page__icon" />
+          <div className="post-page__lecture">
+            <img
+              src={`https://blog-v1-digf.onrender.com/${postInfo.cover}`}
+              alt="Main Image"
+              className="post-page__cover"
+            />
+            <div dangerouslySetInnerHTML={{ __html: postInfo.content }}></div>
+          </div>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: postInfo.content }}></div>
       </div>
 
       <Community />
