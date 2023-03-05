@@ -1,7 +1,7 @@
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuill } from "react-quilljs";
 import "./createPost.scss";
 
 import "quill/dist/quill.snow.css";
@@ -27,31 +27,6 @@ const CreatePost = () => {
   };
 
   const [wordInformation, setWordInformation] = useState<any>(null);
-
-  const { quill, quillRef, Quill } = useQuill({});
-
-  if (Quill && !quill) {
-  }
-
-  useEffect(() => {
-    if (quill) {
-      quill.on("text-change", (delta, oldContents) => {
-        console.log("Text change!");
-        console.log(delta);
-        console.log("oldContents", oldContents);
-        setContent(oldContents);
-
-        let currrentContents = quill.getContents();
-        console.log(currrentContents.diff(oldContents));
-
-        if (quillRef.current) {
-          const editorContent = quillRef.current.firstChild.innerHTML;
-          setContent(editorContent);
-          console.log("Editor content:", editorContent);
-        }
-      });
-    }
-  }, [quill, Quill, wordInformation]);
 
   async function createNewPost(ev: any) {
     const data = new FormData();
@@ -117,7 +92,7 @@ const CreatePost = () => {
     reader.onload = function (event: any) {
       const wordContent = event.target.result;
       convertWordToHtml(wordContent).then(function (htmlContent) {
-        quillRef.current.firstChild.innerHTML = htmlContent;
+        // quillRef.current.firstChild.innerHTML = htmlContent;
         setWordInformation(htmlContent);
       });
     };
@@ -215,7 +190,7 @@ const CreatePost = () => {
         </button>
 
         <div className="content">
-          <div ref={quillRef} />
+          <ReactQuill value={content} onChange={setContent} />
         </div>
 
         <div className="create-post__btn-container">
