@@ -16,7 +16,15 @@ const salt = bcrypt.genSaltSync(10);
 const secret = "qiweoqwjoe123";
 
 app.use(
-  cors({ credentials: true, origin: "https://blog-v1-digf.onrender.com" })
+  cors({
+    credentials: true,
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:4173/",
+      "http://localhost:5173/",
+      "https://blog-v1-digf.onrender.com",
+    ],
+  })
 );
 app.use(express.json());
 app.use(cookieParser());
