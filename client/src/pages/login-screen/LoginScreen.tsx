@@ -18,7 +18,7 @@ const LoginScreen = () => {
 
   const login = async (event: any) => {
     event.preventDefault();
-    const response = await fetch("http://localhost:4000/login", {
+    const response = await fetch("https://blog-v1-digf.onrender.com/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-type": "application/json" },

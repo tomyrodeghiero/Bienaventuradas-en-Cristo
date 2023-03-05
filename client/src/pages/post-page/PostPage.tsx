@@ -16,7 +16,7 @@ const PostPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   useEffect(() => {
-    fetch(`http://localhost:4000/post/${id}`).then((response) => {
+    fetch(`https://blog-v1-digf.onrender.com/post/${id}`).then((response) => {
       response.json().then((postInfo) => {
         setPostInfo(postInfo);
       });
@@ -55,7 +55,7 @@ const PostPage = () => {
         </h5>
         <div>
           <img
-            src={`http://localhost:4000/${postInfo.cover}`}
+            src={`https://blog-v1-digf.onrender.com/${postInfo.cover}`}
             alt="Main Image"
             className="post-page__cover"
           />
