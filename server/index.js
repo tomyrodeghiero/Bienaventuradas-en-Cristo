@@ -31,20 +31,6 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
-// Configuración de cookie
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://blog-v1-digf.onrender.com/"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  next();
-});
 
 mongoose.connect(
   "mongodb+srv://blog:blog-rest-api@cluster0.xih2rrz.mongodb.net/?retryWrites=true&w=majority"
@@ -72,10 +58,7 @@ app.post("/login", async (req, res) => {
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
       // logged in
-      console.log("passOk", passOk);
       jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
-        console.log("token", token);
-        console.log("user information: ", userDoc._id, username);
         if (err) throw err;
         res.cookie("token", token).json({
           id: userDoc._id,
@@ -130,7 +113,7 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
         cover: newPath,
         author: info.id,
       });
-      res.status(200).json(postDoc);
+      res.json(postDoc);
     });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
