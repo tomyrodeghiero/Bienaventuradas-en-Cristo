@@ -37,14 +37,12 @@ const Posts = () => {
   const [posts, setPosts] = useState<any>([]);
 
   useEffect(() => {
-    fetch("https://bienaventuradas-en-cristo-rest-api.vercel.app/post").then(
-      (response) => {
-        response.json().then((posts) => {
-          setPosts(posts);
-          console.log(posts);
-        });
-      }
-    );
+    fetch("http://localhost:4000/post").then((response) => {
+      response.json().then((posts) => {
+        setPosts(posts);
+        console.log(posts);
+      });
+    });
   }, []);
 
   return (

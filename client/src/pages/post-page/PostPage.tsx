@@ -16,9 +16,7 @@ const PostPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   useEffect(() => {
-    fetch(
-      `https://bienaventuradas-en-cristo-rest-api.vercel.app/post/${id}`
-    ).then((response) => {
+    fetch(`http://localhost:4000/post/${id}`).then((response) => {
       response.json().then((postInfo) => {
         setPostInfo(postInfo);
       });
