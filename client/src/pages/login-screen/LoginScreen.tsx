@@ -18,12 +18,15 @@ const LoginScreen = () => {
 
   const login = async (event: any) => {
     event.preventDefault();
-    const response = await fetch("http://localhost:4000/login", {
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-      headers: { "Content-type": "application/json" },
-      credentials: "include",
-    });
+    const response = await fetch(
+      "https://bienaventuradas-en-cristo-rest-api.vercel.app/login",
+      {
+        method: "POST",
+        body: JSON.stringify({ username, password }),
+        headers: { "Content-type": "application/json" },
+        credentials: "include",
+      }
+    );
 
     console.log("response", response);
 

@@ -16,7 +16,9 @@ const PostPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   useEffect(() => {
-    fetch(`https://blog-v1-digf.onrender.com/post/${id}`).then((response) => {
+    fetch(
+      `https://bienaventuradas-en-cristo-rest-api.vercel.app/post/${id}`
+    ).then((response) => {
       response.json().then((postInfo) => {
         setPostInfo(postInfo);
       });
@@ -58,7 +60,7 @@ const PostPage = () => {
           <img src={Instagram} alt="Instagram" className="post-page__icon" />
           <div className="post-page__lecture">
             <img
-              src={`https://blog-v1-digf.onrender.com/${postInfo.cover}`}
+              src={`https://bienaventuradas-en-cristo-rest-api.vercel.app/${postInfo.cover}`}
               alt="Main Image"
               className="post-page__cover"
             />

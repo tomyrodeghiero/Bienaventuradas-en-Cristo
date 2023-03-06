@@ -37,12 +37,14 @@ const Posts = () => {
   const [posts, setPosts] = useState<any>([]);
 
   useEffect(() => {
-    fetch("https://blog-v1-digf.onrender.com/post").then((response) => {
-      response.json().then((posts) => {
-        setPosts(posts);
-        console.log(posts);
-      });
-    });
+    fetch("https://bienaventuradas-en-cristo-rest-api.vercel.app/post").then(
+      (response) => {
+        response.json().then((posts) => {
+          setPosts(posts);
+          console.log(posts);
+        });
+      }
+    );
   }, []);
 
   return (

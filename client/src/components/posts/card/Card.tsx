@@ -13,7 +13,7 @@ const Card = ({ _id, cover, number, title, summary }: any) => {
 
       <div className="card__right-section">
         <img
-          src={`https://blog-v1-digf.onrender.com/${cover}`}
+          src={`https://bienaventuradas-en-cristo-rest-api.vercel.app/${cover}`}
           alt="card-post"
           className="card__image"
         />

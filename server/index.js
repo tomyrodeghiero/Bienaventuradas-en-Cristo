@@ -25,6 +25,7 @@ app.use(
       "https://blog-v1-digf.onrender.com",
       "https://bienaventuradas-en-cristo.vercel.app",
       "https://blog-frontend-v2.onrender.com",
+      "https://bienaventuradas-en-cristo-rest-api.vercel.app",
     ],
   })
 );
