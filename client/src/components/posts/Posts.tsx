@@ -37,12 +37,14 @@ const Posts = () => {
   const [posts, setPosts] = useState<any>([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/post").then((response) => {
-      response.json().then((posts) => {
-        setPosts(posts);
-        console.log(posts);
-      });
-    });
+    fetch("https://blog-project-red-seven.vercel.app/api/post").then(
+      (response) => {
+        response.json().then((posts) => {
+          setPosts(posts);
+          console.log(posts);
+        });
+      }
+    );
   }, []);
 
   return (

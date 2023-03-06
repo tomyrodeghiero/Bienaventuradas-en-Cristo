@@ -26,18 +26,19 @@ app.use(
       "https://bienaventuradas-en-cristo.vercel.app",
       "https://blog-frontend-v2.onrender.com",
       "https://bienaventuradas-en-cristo-rest-api.vercel.app",
+      "https://blog-project-red-seven.vercel.app",
     ],
   })
 );
 app.use(express.json());
 app.use(cookieParser());
-app.use("/uploads", express.static(__dirname + "/uploads"));
+app.use("/api/uploads", express.static(__dirname + "/uploads"));
 
 mongoose.connect(
   "mongodb+srv://blog:blog-rest-api@cluster0.xih2rrz.mongodb.net/?retryWrites=true&w=majority"
 );
 
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   const { username, password } = req.body;
   try {
     const userDoc = await UserModel.create({
@@ -51,7 +52,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
   const userDoc = await User.findOne({ username: username });
 
@@ -72,7 +73,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/profile", (req, res) => {
+app.get("/api/profile", (req, res) => {
   const token = req.cookies.token;
 
   if (!token) {
@@ -85,11 +86,11 @@ app.get("/profile", (req, res) => {
   });
 });
 
-app.post("/logout", (req, res) => {
+app.post("/api/logout", (req, res) => {
   res.cookie("token", "").json("okay");
 });
 
-app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
+app.post("/api/post", uploadMiddleware.single("file"), async (req, res) => {
   try {
     const { originalname, path } = req.file;
     const parts = originalname.split(".");
@@ -122,7 +123,7 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
 });
 
 app.put(
-  "/post",
+  "/api/post",
   (req, res, next) => {
     const { token } = req.cookies;
     if (!token) {
@@ -137,7 +138,7 @@ app.put(
   }
 );
 
-app.get("/post", async (req, res) => {
+app.get("/api/post", async (req, res) => {
   res.json(
     await Post.find()
       .populate("author", ["username"])
@@ -146,7 +147,7 @@ app.get("/post", async (req, res) => {
   );
 });
 
-app.get("/post/:id", async (req, res) => {
+app.get("/api/post/:id", async (req, res) => {
   const { id } = req.params;
   const postDoc = await Post.findById(id).populate("author", ["username"]);
   res.json(postDoc);
