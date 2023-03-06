@@ -27,7 +27,7 @@ const CreatePost = () => {
     data.set("file", files[0]);
     ev.preventDefault();
     const response = await fetch(
-      "https://bienaventuradas-en-cristo-rest-api.vercel.app/post",
+      "https://blog-project-red-seven.vercel.app/post",
       {
         method: "POST",
         body: data,

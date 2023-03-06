@@ -35,13 +35,11 @@ const Hero = () => {
   const [posts, setPosts] = useState<any>([]);
 
   useEffect(() => {
-    fetch("https://bienaventuradas-en-cristo-rest-api.vercel.app/post").then(
-      (response) => {
-        response.json().then((posts) => {
-          setPosts(posts);
-        });
-      }
-    );
+    fetch("https://blog-project-red-seven.vercel.app/post").then((response) => {
+      response.json().then((posts) => {
+        setPosts(posts);
+      });
+    });
   }, []);
 
   let postsUpgrade: any = [];
