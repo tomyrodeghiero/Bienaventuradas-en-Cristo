@@ -38,7 +38,7 @@ mongoose.connect(
   "mongodb+srv://blog:blog-rest-api@cluster0.xih2rrz.mongodb.net/?retryWrites=true&w=majority"
 );
 
-app.post("/server/register", async (req, res) => {
+app.post("/register", async (req, res) => {
   const { username, password } = req.body;
   try {
     const userDoc = await UserModel.create({
@@ -52,7 +52,7 @@ app.post("/server/register", async (req, res) => {
   }
 });
 
-app.post("/server/login", async (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const userDoc = await User.findOne({ username: username });
 
@@ -73,7 +73,7 @@ app.post("/server/login", async (req, res) => {
   }
 });
 
-app.get("/server/profile", (req, res) => {
+app.get("/profile", (req, res) => {
   const token = req.cookies.token;
 
   if (!token) {
@@ -86,11 +86,11 @@ app.get("/server/profile", (req, res) => {
   });
 });
 
-app.post("/server/logout", (req, res) => {
+app.post("/logout", (req, res) => {
   res.cookie("token", "").json("okay");
 });
 
-app.post("/server/post", uploadMiddleware.single("file"), async (req, res) => {
+app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   try {
     const { originalname, path } = req.file;
     const parts = originalname.split(".");
@@ -123,7 +123,7 @@ app.post("/server/post", uploadMiddleware.single("file"), async (req, res) => {
 });
 
 app.put(
-  "/server/post",
+  "/post",
   (req, res, next) => {
     const { token } = req.cookies;
     if (!token) {
@@ -138,7 +138,7 @@ app.put(
   }
 );
 
-app.get("/server/post", async (req, res) => {
+app.get("/post", async (req, res) => {
   res.json(
     await Post.find()
       .populate("author", ["username"])
@@ -147,7 +147,7 @@ app.get("/server/post", async (req, res) => {
   );
 });
 
-app.get("/server/post/:id", async (req, res) => {
+app.get("/post/:id", async (req, res) => {
   const { id } = req.params;
   const postDoc = await Post.findById(id).populate("author", ["username"]);
   res.json(postDoc);
