@@ -16,11 +16,13 @@ const PostPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   useEffect(() => {
-    fetch(`http://localhost:4000/post/${id}`).then((response) => {
-      response.json().then((postInfo) => {
-        setPostInfo(postInfo);
-      });
-    });
+    fetch(`https://blog-project-red-seven.vercel.app/server/post/${id}`).then(
+      (response) => {
+        response.json().then((postInfo) => {
+          setPostInfo(postInfo);
+        });
+      }
+    );
   }, []);
 
   console.log("post info", postInfo);
