@@ -19,14 +19,14 @@ app.use(
   cors({
     credentials: true,
     origin: [
-      "http://localhost:3000/",
-      "http://localhost:4173/",
+      "http://localhost:3000",
+      "http://localhost:4173",
       "http://localhost:5173",
-      "https://blog-v1-digf.onrender.com/",
-      "https://bienaventuradas-en-cristo.vercel.app/",
-      "https://blog-frontend-v2.onrender.com/",
-      "https://bienaventuradas-en-cristo-rest-api.vercel.app/",
-      "https://blog-project-red-seven.vercel.app/",
+      "https://blog-v1-digf.onrender.com",
+      "https://bienaventuradas-en-cristo.vercel.app",
+      "https://blog-frontend-v2.onrender.com",
+      "https://bienaventuradas-en-cristo-rest-api.vercel.app",
+      "https://blog-project-red-seven.vercel.app",
     ],
   })
 );
