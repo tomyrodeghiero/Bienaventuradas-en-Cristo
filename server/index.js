@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { default: mongoose, Schema } = require("mongoose");
+mongoose.set("strictQuery", false);
 const UserModel = require("./models/User");
 const User = require("./models/User");
 const Post = require("./models/Post");
