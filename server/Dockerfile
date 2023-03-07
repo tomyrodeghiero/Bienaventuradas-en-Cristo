@@ -1,37 +1,20 @@
-FROM debian:bullseye as builder
+# Use an official Node.js runtime as a parent image
+FROM node:16-alpine
 
-ARG NODE_VERSION=18.10.0
-ARG YARN_VERSION=1.22.19
-
-RUN apt-get update; apt install -y curl python-is-python3 pkg-config build-essential
-RUN curl https://get.volta.sh | bash
-ENV VOLTA_HOME /root/.volta
-ENV PATH /root/.volta/bin:$PATH
-RUN volta install node@${NODE_VERSION} yarn@${YARN_VERSION}
-
-#######################################################################
-
-RUN mkdir /app
+# Set the working directory to /app
 WORKDIR /app
 
-# Yarn will not install any package listed in "devDependencies" when NODE_ENV is set to "production"
-# to install all modules: "yarn install --production=false"
-# Ref: https://classic.yarnpkg.com/lang/en/docs/cli/install/#toc-yarn-install-production-true-false
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
 
-ENV NODE_ENV production
+# Install dependencies
+RUN npm install
 
+# Copy the rest of the application code to the container
 COPY . .
 
-RUN yarn install
-FROM debian:bullseye
+# Expose port 3000 for the Node.js application to listen on
+EXPOSE 4000
 
-LABEL fly_launch_runtime="nodejs"
-
-COPY --from=builder /root/.volta /root/.volta
-COPY --from=builder /app /app
-
-WORKDIR /app
-ENV NODE_ENV production
-ENV PATH /root/.volta/bin:$PATH
-
-CMD [ "yarn", "run", "start" ]
+# Start the Node.js application
+CMD ["npm", "start"]
