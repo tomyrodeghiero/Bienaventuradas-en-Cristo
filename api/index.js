@@ -31,7 +31,6 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-app.use("/api/uploads", express.static(__dirname + "/uploads"));
 
 mongoose.connect(
   "mongodb+srv://blog:blog-rest-api@cluster0.xih2rrz.mongodb.net/?retryWrites=true&w=majority"
