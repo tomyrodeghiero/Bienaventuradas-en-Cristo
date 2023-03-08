@@ -9,7 +9,6 @@ const bcrypt = require("bcryptjs");
 const app = express();
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const fs = require("fs");
 
 const salt = bcrypt.genSaltSync(10);
 const secret = "qiweoqwjoe123";
@@ -87,54 +86,6 @@ app.get("/profile", (req, res) => {
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json("okay");
 });
-
-app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
-  try {
-    const { originalname, path } = req.file;
-    const parts = originalname.split(".");
-    const ext = parts[parts.length - 1];
-    const newPath = path + "." + ext;
-    fs.renameSync(path, newPath);
-
-    const { token } = req.cookies;
-
-    if (!token) {
-      return res.status(401).json({ message: "No token provided" });
-    }
-
-    jwt.verify(token, secret, {}, async (err, info) => {
-      if (err) throw err;
-
-      const { title, summary, content } = req.body;
-      const postDoc = await Post.create({
-        title,
-        summary,
-        content,
-        cover: newPath,
-        author: info.id,
-      });
-      res.json(postDoc);
-    });
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
-
-app.put(
-  "/post",
-  (req, res, next) => {
-    const { token } = req.cookies;
-    if (!token) {
-      res.status(401).json({ message: "Unauthorized" });
-    } else {
-      next();
-    }
-  },
-  uploadMiddleware.single("file"),
-  async (req, res) => {
-    res.json(req.file);
-  }
-);
 
 app.get("/post", async (req, res) => {
   res.json(
