@@ -35,7 +35,7 @@ mongoose.connect(
   "mongodb+srv://blog:blog-rest-api@cluster0.xih2rrz.mongodb.net/?retryWrites=true&w=majority"
 );
 
-app.get("/api/test", async (req, res) => {
+app.get("/api/post", async (req, res) => {
   mongoose.connect(
     "mongodb+srv://blog:blog-rest-api@cluster0.xih2rrz.mongodb.net/?retryWrites=true&w=majority"
   );
