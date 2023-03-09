@@ -104,7 +104,7 @@ app.post("/api/logout", (req, res) => {
 
 const formidable = require("formidable");
 
-app.post("/api/post", async (req, res) => {
+app.post("/api/newpost", async (req, res) => {
   const form = formidable({
     multiples: false,
     uploadDir: __dirname + "/uploads",
