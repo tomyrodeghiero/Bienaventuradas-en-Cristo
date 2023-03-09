@@ -10,7 +10,7 @@ const app = express();
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
-const uploadMiddleware = multer({ dest: "uploads/" });
+const uploadMiddleware = multer({ dest: "/uploads" });
 // const fs = require("fs");
 
 const salt = bcrypt.genSaltSync(10);
@@ -104,7 +104,7 @@ app.post("/api/logout", (req, res) => {
   res.cookie("token", "").json("okay");
 });
 
-app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
+app.post("/api/post", uploadMiddleware.single("file"), async (req, res) => {
   try {
     const { originalname, path } = req.file;
     const parts = originalname.split(".");
