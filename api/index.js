@@ -54,26 +54,26 @@ app.get("/api/post/:id", async (req, res) => {
   res.json(postDoc);
 });
 
-app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-  const userDoc = await User.findOne({ username: username });
+// app.post("/login", async (req, res) => {
+//   const { username, password } = req.body;
+//   const userDoc = await User.findOne({ username: username });
 
-  if (userDoc && userDoc.password) {
-    const passOk = bcrypt.compareSync(password, userDoc.password);
-    if (passOk) {
-      // logged in
-      jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
-        if (err) throw err;
-        res.cookie("token", token).json({
-          id: userDoc._id,
-          username,
-        });
-      });
-    }
-  } else {
-    res.status(400).json("wrong credentials");
-  }
-});
+//   if (userDoc && userDoc.password) {
+//     const passOk = bcrypt.compareSync(password, userDoc.password);
+//     if (passOk) {
+//       // logged in
+//       jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+//         if (err) throw err;
+//         res.cookie("token", token).json({
+//           id: userDoc._id,
+//           username,
+//         });
+//       });
+//     }
+//   } else {
+//     res.status(400).json("wrong credentials");
+//   }
+// });
 
 app.listen(4000);
 
