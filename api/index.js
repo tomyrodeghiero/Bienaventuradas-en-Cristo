@@ -54,7 +54,7 @@ app.get("/api/post/:id", async (req, res) => {
   res.json(postDoc);
 });
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
   const userDoc = await User.findOne({ username: username });
 

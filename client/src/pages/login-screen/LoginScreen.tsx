@@ -19,7 +19,7 @@ const LoginScreen = () => {
   const login = async (event: any) => {
     event.preventDefault();
     const response = await fetch(
-      "https://bienaventuradas-en-cristo-rest-api.vercel.app/login",
+      "https://bienaventuradas-en-cristo-rest-api.vercel.app/api/login",
       {
         method: "POST",
         body: JSON.stringify({ username, password }),
