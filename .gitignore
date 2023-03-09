@@ -1,2 +1,4 @@
-node_modules
-.env
+.idea
+api/node_modules
+api/.env
+api/uploads/*
