@@ -34,17 +34,14 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-
 app.use("/api/uploads", express.static(__dirname + "/uploads"));
 
 mongoose.connect(
   "mongodb+srv://blog:blog-rest-api@cluster0.xih2rrz.mongodb.net/?retryWrites=true&w=majority"
 );
 
+// GET
 app.get("/api/post", async (req, res) => {
-  mongoose.connect(
-    "mongodb+srv://blog:blog-rest-api@cluster0.xih2rrz.mongodb.net/?retryWrites=true&w=majority"
-  );
   res.json(await Post.find());
 });
 
@@ -54,6 +51,7 @@ app.get("/api/post/:id", async (req, res) => {
   res.json(postDoc);
 });
 
+// POST
 app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
   const userDoc = await User.findOne({ username: username });
@@ -75,30 +73,21 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+app.post("/register", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const userDoc = await UserModel.create({
+      username,
+      password: bcrypt.hashSync(password, salt),
+    });
+    res.json(userDoc);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json(e);
+  }
+});
+
 app.listen(4000);
-
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: [
-//       "http://localhost:3000",
-//       "http://localhost:4173",
-//       "http://localhost:5173",
-//       "https://blog-v1-digf.onrender.com",
-//       "https://bienaventuradas-en-cristo.vercel.app",
-//       "https://blog-frontend-v2.onrender.com",
-//       "https://bienaventuradas-en-cristo-rest-api.vercel.app",
-//       "https://blog-project-red-seven.vercel.app",
-//     ],
-//   })
-// );
-// app.use(express.json());
-// app.use(cookieParser());
-// app.use("/api/uploads", express.static(__dirname + "/uploads"));
-
-// mongoose.connect(
-//   "mongodb+srv://blog:blog-rest-api@cluster0.xih2rrz.mongodb.net/?retryWrites=true&w=majority"
-// );
 
 // app.post("/register", async (req, res) => {
 //   const { username, password } = req.body;
