@@ -35,6 +35,8 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("/api/uploads", express.static(__dirname + "/uploads"));
+
 mongoose.connect(
   "mongodb+srv://blog:blog-rest-api@cluster0.xih2rrz.mongodb.net/?retryWrites=true&w=majority"
 );
@@ -50,6 +52,27 @@ app.get("/api/post/:id", async (req, res) => {
   const { id } = req.params;
   const postDoc = await Post.findById(id).populate("author", ["username"]);
   res.json(postDoc);
+});
+
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const userDoc = await User.findOne({ username: username });
+
+  if (userDoc && userDoc.password) {
+    const passOk = bcrypt.compareSync(password, userDoc.password);
+    if (passOk) {
+      // logged in
+      jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+        if (err) throw err;
+        res.cookie("token", token).json({
+          id: userDoc._id,
+          username,
+        });
+      });
+    }
+  } else {
+    res.status(400).json("wrong credentials");
+  }
 });
 
 app.listen(4000);
