@@ -51,6 +51,19 @@ app.get("/api/post/:id", async (req, res) => {
   res.json(postDoc);
 });
 
+app.get("/api/profile", (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
+  jwt.verify(token, secret, {}, (err, info) => {
+    if (err) throw err;
+    res.json(info);
+  });
+});
+
 // POST
 app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
@@ -73,7 +86,7 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   const { username, password } = req.body;
   try {
     const userDoc = await UserModel.create({
@@ -87,59 +100,12 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post("/api/logout", (req, res) => {
+  res.cookie("token", "").json("okay");
+});
+
+// Listen port
 app.listen(4000);
-
-// app.post("/register", async (req, res) => {
-//   const { username, password } = req.body;
-//   try {
-//     const userDoc = await UserModel.create({
-//       username,
-//       password: bcrypt.hashSync(password, salt),
-//     });
-//     res.json(userDoc);
-//   } catch (e) {
-//     console.log(e);
-//     res.status(400).json(e);
-//   }
-// });
-
-// app.post("/login", async (req, res) => {
-//   const { username, password } = req.body;
-//   const userDoc = await User.findOne({ username: username });
-
-//   if (userDoc && userDoc.password) {
-//     const passOk = bcrypt.compareSync(password, userDoc.password);
-//     if (passOk) {
-//       // logged in
-//       jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
-//         if (err) throw err;
-//         res.cookie("token", token).json({
-//           id: userDoc._id,
-//           username,
-//         });
-//       });
-//     }
-//   } else {
-//     res.status(400).json("wrong credentials");
-//   }
-// });
-
-// app.get("/profile", (req, res) => {
-//   const token = req.cookies.token;
-
-//   if (!token) {
-//     return res.status(401).json({ message: "No token provided" });
-//   }
-
-//   jwt.verify(token, secret, {}, (err, info) => {
-//     if (err) throw err;
-//     res.json(info);
-//   });
-// });
-
-// app.post("/logout", (req, res) => {
-//   res.cookie("token", "").json("okay");
-// });
 
 // app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
 //   try {

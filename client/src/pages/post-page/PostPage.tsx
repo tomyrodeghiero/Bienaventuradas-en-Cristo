@@ -16,7 +16,7 @@ const PostPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   useEffect(() => {
-    fetch(`https://blog-project-red-seven.vercel.app/server/post/${id}`).then(
+    fetch(`https://blog-project-red-seven.vercel.app/api/post/${id}`).then(
       (response) => {
         response.json().then((postInfo) => {
           setPostInfo(postInfo);
