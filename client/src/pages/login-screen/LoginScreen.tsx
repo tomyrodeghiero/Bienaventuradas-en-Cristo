@@ -33,7 +33,7 @@ const LoginScreen = () => {
     if (response.ok) {
       response.json().then((userInfo) => {
         setUserInfo(userInfo);
-        // setRedirect(true);
+        setRedirect(true);
       });
     } else {
       alert("wrong credentials");
