@@ -9,7 +9,6 @@ const bcrypt = require("bcryptjs");
 const app = express();
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const formidable = require("formidable");
 
 const salt = bcrypt.genSaltSync(10);
 const secret = "qiweoqwjoe123";
@@ -102,53 +101,40 @@ app.post("/api/logout", (req, res) => {
   res.cookie("token", "").json("okay");
 });
 
-const formidable = require("formidable");
-
-app.post("/api/newpost", async (req, res) => {
-  const form = formidable({
-    multiples: false,
-    uploadDir: __dirname + "/uploads",
-  });
-
-  form.parse(req, async (err, fields, files) => {
-    try {
-      if (err) throw err;
-
-      const { token } = req.cookies;
-
-      if (!token) {
-        return res.status(401).json({ message: "No token provided" });
-      }
-
-      const { title, summary, content } = fields;
-      const { file } = files;
-      const parts = file.name.split(".");
-      const ext = parts[parts.length - 1];
-      const newPath = file.path + "." + ext;
-
-      fs.renameSync(file.path, newPath);
-
-      jwt.verify(token, secret, {}, async (err, info) => {
-        if (err) throw err;
-
-        const postDoc = await Post.create({
-          title,
-          summary,
-          content,
-          cover: newPath,
-          author: info.id,
-        });
-
-        res.json(postDoc);
-      });
-    } catch (error) {
-      res.status(500).json({ message: "Internal Server Error" });
-    }
-  });
-});
-
 // Listen port
 app.listen(4000);
+
+// app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
+//   try {
+//     const { originalname, path } = req.file;
+//     const parts = originalname.split(".");
+//     const ext = parts[parts.length - 1];
+//     const newPath = path + "." + ext;
+//     fs.renameSync(path, newPath);
+
+//     const { token } = req.cookies;
+
+//     if (!token) {
+//       return res.status(401).json({ message: "No token provided" });
+//     }
+
+//     jwt.verify(token, secret, {}, async (err, info) => {
+//       if (err) throw err;
+
+//       const { title, summary, content } = req.body;
+//       const postDoc = await Post.create({
+//         title,
+//         summary,
+//         content,
+//         cover: newPath,
+//         author: info.id,
+//       });
+//       res.json(postDoc);
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// });
 
 // app.put(
 //   "/post",
@@ -165,3 +151,12 @@ app.listen(4000);
 //     res.json(req.file);
 //   }
 // );
+
+// app.get("/post", async (req, res) => {
+//   res.json(
+//     await Post.find()
+//       .populate("author", ["username"])
+//       .sort({ createdAt: -1 })
+//       .limit(20)
+//   );
+// });
