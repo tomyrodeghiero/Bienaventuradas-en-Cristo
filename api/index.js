@@ -12,29 +12,7 @@ const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
-// const multer = require("multer");
-// const uploadMiddleware = multer({ dest: "uploads/" });
-// const fs = require("fs");
-
-cloudinary.config({
-  cloud_name: "deqspgsn4",
-  api_key: "791472898121285",
-  api_secret: "bylWI1EMDWHoEcBpwAi-OEIjQWg",
-  secure: true,
-});
-
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "uploads",
-    allowed_formats: ["jpg", "png", "jpeg", "gif"],
-  },
-});
-
-// create multer middleware for file upload
-const uploadMiddleware = multer({
-  storage: storage,
-});
+const fs = require("fs");
 
 const salt = bcrypt.genSaltSync(10);
 const secret = "qiweoqwjoe123";
@@ -87,36 +65,49 @@ app.get("/api/profile", (req, res) => {
   });
 });
 
-// POST
-app.post("/api/post", uploadMiddleware.single("file"), async (req, res) => {
-  const { originalname, path } = req.file;
-  const parts = originalname.split(".");
-  const ext = parts[parts.length - 1];
-  const newPath = path + "." + ext;
-  fs.renameSync(path, newPath);
+cloudinary.config({
+  cloud_name: "deqspgsn4",
+  api_key: "791472898121285",
+  api_secret: "bylWI1EMDWHoEcBpwAi-OEIjQWg",
+  secure: true,
+});
 
-  const { token } = req.cookies;
-  jwt.verify(token, secret, {}, async (err, info) => {
-    if (err) throw err;
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "uploads",
+    allowed_formats: ["jpg", "png", "jpeg", "gif"],
+  },
+});
+
+const uploadMiddleware = multer({ storage });
+
+app.post("/api/post", uploadMiddleware.single("file"), async (req, res) => {
+  try {
     const { title, summary, content } = req.body;
 
-    // upload cover image to cloudinary
-    const result = await cloudinary.uploader.upload(newPath);
+    const result = await cloudinary.uploader.upload(req.file.path);
 
-    // create post document in database with cloudinary URL for cover image
     const postDoc = await Post.create({
       title,
       summary,
       content,
       cover: result.secure_url,
-      author: info.id,
+      author: req.cookies.token
+        ? jwt.verify(req.cookies.token, secret).id
+        : undefined,
     });
 
-    // delete local file after uploading to cloudinary
-    fs.unlinkSync(newPath);
+    res.status(200).json(postDoc);
+  } catch (error) {
+    console.log("Error", error);
 
-    res.json(postDoc);
-  });
+    if (error.name === "JsonWebTokenError") {
+      return res.status(401).json({ message: "Invalid token" });
+    }
+
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 app.post("/api/login", async (req, res) => {
