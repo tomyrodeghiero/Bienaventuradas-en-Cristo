@@ -3,6 +3,7 @@ import "./card.scss";
 import { Link } from "react-router-dom";
 
 const Card = ({ _id, cover, number, title, summary }: any) => {
+  console.log("cover", cover);
   return (
     <Link to={`/post/${_id}`} className="card__container">
       <div className="card__left-section">
@@ -12,11 +13,7 @@ const Card = ({ _id, cover, number, title, summary }: any) => {
       </div>
 
       <div className="card__right-section">
-        <img
-          src={`https://bienaventuradas-en-cristo-rest-api.vercel.app/${cover}`}
-          alt="card-post"
-          className="card__image"
-        />
+        <img src={cover} alt="card-post" className="card__image" />
       </div>
     </Link>
   );
