@@ -9,6 +9,8 @@ const bcrypt = require("bcryptjs");
 const app = express();
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
 // const multer = require("multer");
 // const uploadMiddleware = multer({ dest: "uploads/" });
@@ -19,6 +21,19 @@ cloudinary.config({
   api_key: "791472898121285",
   api_secret: "bylWI1EMDWHoEcBpwAi-OEIjQWg",
   secure: true,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "uploads",
+    allowed_formats: ["jpg", "png", "jpeg", "gif"],
+  },
+});
+
+// create multer middleware for file upload
+const uploadMiddleware = multer({
+  storage: storage,
 });
 
 const salt = bcrypt.genSaltSync(10);
@@ -74,12 +89,21 @@ app.get("/api/profile", (req, res) => {
 
 // POST
 app.post("/api/post", uploadMiddleware.single("file"), async (req, res) => {
-  const { title, summary, content } = req.body;
-  const { path } = req.file;
+  const { originalname, path } = req.file;
+  const parts = originalname.split(".");
+  const ext = parts[parts.length - 1];
+  const newPath = path + "." + ext;
+  fs.renameSync(path, newPath);
 
-  try {
-    const result = await cloudinary.uploader.upload(path, { folder: "blog" });
+  const { token } = req.cookies;
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) throw err;
+    const { title, summary, content } = req.body;
 
+    // upload cover image to cloudinary
+    const result = await cloudinary.uploader.upload(newPath);
+
+    // create post document in database with cloudinary URL for cover image
     const postDoc = await Post.create({
       title,
       summary,
@@ -88,11 +112,11 @@ app.post("/api/post", uploadMiddleware.single("file"), async (req, res) => {
       author: info.id,
     });
 
+    // delete local file after uploading to cloudinary
+    fs.unlinkSync(newPath);
+
     res.json(postDoc);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error uploading image" });
-  }
+  });
 });
 
 app.post("/api/login", async (req, res) => {
