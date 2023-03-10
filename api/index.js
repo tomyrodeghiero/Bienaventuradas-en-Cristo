@@ -13,6 +13,13 @@ const cookieParser = require("cookie-parser");
 // const uploadMiddleware = multer({ dest: "uploads/" });
 // const fs = require("fs");
 
+cloudinary.config({
+  cloud_name: "deqspgsn4",
+  api_key: "791472898121285",
+  api_secret: "bylWI1EMDWHoEcBpwAi-OEIjQWg",
+  secure: true,
+});
+
 const salt = bcrypt.genSaltSync(10);
 const secret = "qiweoqwjoe123";
 
@@ -65,27 +72,27 @@ app.get("/api/profile", (req, res) => {
 });
 
 // POST
-// app.post("/api/post", uploadMiddleware.single("file"), async (req, res) => {
-//   const { originalname, path } = req.file;
-//   const parts = originalname.split(".");
-//   const ext = parts[parts.length - 1];
-//   const newPath = path + "." + ext;
-//   fs.renameSync(path, newPath);
+app.post("/api/post", uploadMiddleware.single("file"), async (req, res) => {
+  const { title, summary, content } = req.body;
+  const { path } = req.file;
 
-//   const { token } = req.cookies;
-//   jwt.verify(token, secret, {}, async (err, info) => {
-//     if (err) throw err;
-//     const { title, summary, content } = req.body;
-//     const postDoc = await Post.create({
-//       title,
-//       summary,
-//       content,
-//       cover: newPath,
-//       author: info.id,
-//     });
-//     res.json(postDoc);
-//   });
-// });
+  try {
+    const result = await cloudinary.uploader.upload(path, { folder: "blog" });
+
+    const postDoc = await Post.create({
+      title,
+      summary,
+      content,
+      cover: result.secure_url,
+      author: info.id,
+    });
+
+    res.json(postDoc);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error uploading image" });
+  }
+});
 
 app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
